@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cl_item_github_users"
+    android:id="@+id/cl_user"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/midnight_blue_800"
@@ -11,7 +11,7 @@
     android:paddingVertical="8dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/img_profile"
+        android:id="@+id/img_avatar"
         android:layout_width="48dp"
         android:layout_height="48dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,38 +19,26 @@
         tools:src="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:textColor="@color/amethyst_200"
         android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@+id/img_profile"
-        app:layout_constraintTop_toTopOf="@+id/img_profile"
+        app:layout_constraintStart_toEndOf="@+id/img_avatar"
+        app:layout_constraintTop_toTopOf="@+id/img_avatar"
         tools:text="@tools:sample/full_names" />
 
-    <ImageView
-        android:id="@+id/img_icon_company"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
-        android:layout_marginTop="4dp"
-        android:contentDescription="@string/user_profile_picture"
-        android:tint="@color/amethyst_200"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/ic_baseline_apartment_24"
-        tools:ignore="UseAppTint" />
-
     <TextView
-        android:id="@+id/tv_company"
+        android:id="@+id/tv_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:textColor="@color/amethyst_200"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/amethyst_400"
         android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@+id/img_icon_company"
-        app:layout_constraintTop_toTopOf="@+id/img_icon_company"
+        app:layout_constraintStart_toStartOf="@+id/tv_username"
+        app:layout_constraintTop_toBottomOf="@+id/tv_username"
         tools:text="@tools:sample/cities" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
