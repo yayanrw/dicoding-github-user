@@ -46,11 +46,11 @@
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:layout_marginTop="4dp"
+        android:contentDescription="@string/detail"
         android:src="@drawable/ic_baseline_chevron_right_24"
-        android:tint="@color/amethyst_400"
+        android:tint="@color/amethyst_700"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/img_avatar"
-        tools:ignore="UseAppTint"
-        android:contentDescription="@string/detail"/>
+        tools:ignore="UseAppTint" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
