@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.constraintlayout.widget.Constraints.TAG
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -55,27 +56,23 @@ class HomeFragment : Fragment() {
                         setupRV(responseBody)
                     }
                 } else {
-                    Log.e(TAG, "onFailure: ${response.message()}")
+                    showToast(response.message())
                 }
             }
 
             override fun onFailure(call: Call<ArrayList<UsersResponse>>, t: Throwable) {
                 showLoading(false)
-                Log.e(TAG, "onFailure: ${t.message}")
+                showToast(t.message.toString())
             }
         })
     }
 
     private fun setupRV(listGithubUser: ArrayList<UsersResponse>) {
-        try {
-            binding.rvGithubUsers.layoutManager = LinearLayoutManager(context)
-            binding.rvGithubUsers.setHasFixedSize(true)
-            userAdapter = UserAdapter(listGithubUser)
-            binding.rvGithubUsers.adapter = userAdapter
-            binding.rvGithubUsers.visibility = View.VISIBLE
-        } catch (e: Exception) {
-            Log.e(TAG, "setupRV: ${e.message}", )
-        }
+        binding.rvGithubUsers.layoutManager = LinearLayoutManager(context)
+        binding.rvGithubUsers.setHasFixedSize(true)
+        userAdapter = UserAdapter(listGithubUser)
+        binding.rvGithubUsers.adapter = userAdapter
+        binding.rvGithubUsers.visibility = View.VISIBLE
     }
 
 
@@ -87,5 +84,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-
+    private fun showToast(messages: String) {
+        Toast.makeText(context, messages, Toast.LENGTH_SHORT).show()
+    }
 }
