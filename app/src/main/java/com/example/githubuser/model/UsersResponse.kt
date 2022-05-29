@@ -1,27 +1,29 @@
 package com.example.githubuser.model
 
-data class UsersResponse(
-	val UsersResponse: List<UsersResponseItem>
+typealias UsersResponse = ArrayList<UsersResponseElement>
+
+data class UsersResponseElement (
+    val login: String,
+    val id: Long,
+    val nodeID: String,
+    val avatarURL: String,
+    val gravatarID: String,
+    val url: String,
+    val htmlURL: String,
+    val followersURL: String,
+    val followingURL: String,
+    val gistsURL: String,
+    val starredURL: String,
+    val subscriptionsURL: String,
+    val organizationsURL: String,
+    val reposURL: String,
+    val eventsURL: String,
+    val receivedEventsURL: String,
+    val type: Type,
+    val siteAdmin: Boolean
 )
 
-data class UsersResponseItem(
-	val gistsUrl: String,
-	val reposUrl: String,
-	val followingUrl: String,
-	val starredUrl: String,
-	val login: String,
-	val followersUrl: String,
-	val type: String,
-	val url: String,
-	val subscriptionsUrl: String,
-	val receivedEventsUrl: String,
-	val avatarUrl: String,
-	val eventsUrl: String,
-	val htmlUrl: String,
-	val siteAdmin: Boolean,
-	val id: Int,
-	val gravatarId: String,
-	val nodeId: String,
-	val organizationsUrl: String
-)
-
+enum class Type {
+    Organization,
+    User
+}
