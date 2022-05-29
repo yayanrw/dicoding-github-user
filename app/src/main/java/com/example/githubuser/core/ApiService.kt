@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface ApiService {
     @GET("users")
-    fun fetchUsers (): Call<UsersResponse>
+    fun fetchUsers (): Call<ArrayList<UsersResponse>>
 }

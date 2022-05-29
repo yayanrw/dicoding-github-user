@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/midnight_blue_800"
-    android:orientation="horizontal"
     android:paddingHorizontal="24dp"
     android:paddingVertical="8dp">
 
@@ -24,8 +23,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
-        android:textColor="@color/amethyst_200"
+        android:textColor="@color/amethyst_400"
         android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/img_avatar"
         app:layout_constraintTop_toTopOf="@+id/img_avatar"
         tools:text="@tools:sample/full_names" />
@@ -40,5 +40,17 @@
         app:layout_constraintStart_toStartOf="@+id/tv_username"
         app:layout_constraintTop_toBottomOf="@+id/tv_username"
         tools:text="@tools:sample/cities" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/ic_baseline_chevron_right_24"
+        android:tint="@color/amethyst_400"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/img_avatar"
+        tools:ignore="UseAppTint"
+        android:contentDescription="@string/detail"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
