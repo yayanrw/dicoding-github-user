@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide
 import com.example.githubuser.databinding.ItemUsersBinding
 import com.example.githubuser.model.UsersResponse
 
-class UserAdapter(private val listUser: ArrayList<UsersResponse>) :
+class UserAdapter(private val listUser: ArrayList<UsersResponse>?) :
     RecyclerView.Adapter<UserAdapter.ListViewHolder>() {
     private lateinit var onItemClickCallback: OnItemClickCallback
 
@@ -23,7 +23,7 @@ class UserAdapter(private val listUser: ArrayList<UsersResponse>) :
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        holder.binding.tvUsername.text = listUser[position].login
+        holder.binding.tvUsername.text = listUser!![position].login
         holder.binding.tvType.text = listUser[position].type.toString()
         Glide.with(holder.itemView.context)
             .load(listUser[position].avatarUrl)
@@ -32,7 +32,7 @@ class UserAdapter(private val listUser: ArrayList<UsersResponse>) :
         holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(listUser[holder.adapterPosition])}
     }
 
-    override fun getItemCount(): Int = listUser.size
+    override fun getItemCount(): Int = listUser!!.size
 
     interface OnItemClickCallback {
         fun onItemClicked(data: UsersResponse)

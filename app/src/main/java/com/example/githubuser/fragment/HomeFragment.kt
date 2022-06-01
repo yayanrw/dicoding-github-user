@@ -11,6 +11,7 @@ import com.example.githubuser.R
 import com.example.githubuser.adapter.UserAdapter
 import com.example.githubuser.core.ApiConfig
 import com.example.githubuser.databinding.FragmentHomeBinding
+import com.example.githubuser.model.UserSearchResponse
 import com.example.githubuser.model.UsersResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -49,11 +50,22 @@ class HomeFragment : Fragment() {
         searchView.queryHint = getString(R.string.search)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let { getUserSearch(it) }
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 return true
+            }
+        })
+
+        searchView.addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
+            override fun onViewAttachedToWindow(v: View?) {
+
+            }
+
+            override fun onViewDetachedFromWindow(v: View?) {
+                getUsers()
             }
         })
         super.onCreateOptionsMenu(menu, inflater)
@@ -85,7 +97,35 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private fun setupRV(listGithubUser: ArrayList<UsersResponse>) {
+    private fun getUserSearch(query: String) {
+        showLoading(true)
+        val client = ApiConfig.getApiService().fetchUserSearch(query)
+
+        client.enqueue(object : Callback<UserSearchResponse?> {
+            override fun onResponse(
+                call: Call<UserSearchResponse?>,
+                response: Response<UserSearchResponse?>
+            ) {
+                showLoading(false)
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    if (responseBody != null) {
+                        setupRV(responseBody.items!!)
+                    }
+                } else {
+                    showToast(response.message())
+                }
+            }
+
+            override fun onFailure(call: Call<UserSearchResponse?>, t: Throwable) {
+                showLoading(false)
+                showToast(t.message.toString())
+            }
+        })
+    }
+
+    private fun setupRV(listGithubUser: ArrayList<UsersResponse>?) {
+        UserAdapter(null)
         binding.rvGithubUsers.layoutManager = LinearLayoutManager(context)
         binding.rvGithubUsers.setHasFixedSize(true)
         userAdapter = UserAdapter(listGithubUser)
