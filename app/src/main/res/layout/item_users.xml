@@ -17,38 +17,39 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/tv_username"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:textColor="@color/amethyst_200"
-        android:textSize="14sp"
-        android:textStyle="bold"
+        android:layout_marginStart="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/img_avatar"
         app:layout_constraintStart_toEndOf="@+id/img_avatar"
-        app:layout_constraintTop_toTopOf="@+id/img_avatar"
-        tools:text="@tools:sample/full_names" />
+        app:layout_constraintTop_toTopOf="@+id/img_avatar">
 
-    <TextView
-        android:id="@+id/tv_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:textColor="@color/amethyst_400"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/tv_username"
-        app:layout_constraintTop_toBottomOf="@+id/tv_username"
-        tools:text="@tools:sample/cities" />
+        <TextView
+            android:id="@+id/tv_username"
+            style="@style/TextContent.Title"
+            tools:text="@tools:sample/full_names" />
+
+        <TextView
+            android:id="@+id/tv_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/amethyst_400"
+            android:textSize="12sp"
+            tools:text="@tools:sample/cities" />
+
+    </LinearLayout>
+
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="36dp"
         android:layout_height="36dp"
-        android:layout_marginTop="4dp"
         android:contentDescription="@string/detail"
         android:src="@drawable/ic_baseline_chevron_right_24"
         android:tint="@color/amethyst_400"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/img_avatar"
         tools:ignore="UseAppTint" />
