@@ -71,7 +71,6 @@ class HomeFragment : Fragment() {
         binding.rvGithubUsers.setHasFixedSize(true)
         userAdapter = UserAdapter(listGithubUser)
         binding.rvGithubUsers.adapter = userAdapter
-        binding.rvGithubUsers.visibility = View.VISIBLE
 
         userAdapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {
             override fun onItemClicked(data: UsersResponse) {
@@ -86,8 +85,10 @@ class HomeFragment : Fragment() {
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) {
             binding.progressBar.visibility = View.VISIBLE
+            binding.rvGithubUsers.visibility = View.GONE
         } else {
             binding.progressBar.visibility = View.GONE
+            binding.rvGithubUsers.visibility = View.VISIBLE
         }
     }
 
