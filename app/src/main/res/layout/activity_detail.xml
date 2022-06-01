@@ -32,8 +32,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_avatar"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
+                style="@style/AvatarBig"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -50,23 +49,76 @@
 
                 <TextView
                     android:id="@+id/tv_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/silver_200"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
+                    style="@style/TextContent.Title.Big"
                     tools:text="@tools:sample/full_names" />
 
                 <TextView
                     android:id="@+id/tv_login"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/silver_400"
-                    android:textSize="16sp"
+                    style="@style/TextContent.SubTitle.Big"
                     tools:text="@tools:sample/first_names" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_count_public_repos"
+                    style="@style/TextCenterHorizontal.Title"
+                    android:text="@string/_0" />
+
+                <TextView
+                    style="@style/TextCenterHorizontal.SubTitle"
+                    android:text="@string/public_repos" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_count_followers"
+                    style="@style/TextCenterHorizontal.Title"
+                    android:text="@string/_0" />
+
+                <TextView
+                    style="@style/TextCenterHorizontal.SubTitle"
+                    android:text="@string/followers" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_count_following"
+                    style="@style/TextCenterHorizontal.Title"
+                    android:text="@string/_0" />
+
+                <TextView
+                    style="@style/TextCenterHorizontal.SubTitle"
+                    android:text="@string/following" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 
