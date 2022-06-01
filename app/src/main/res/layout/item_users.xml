@@ -48,7 +48,7 @@
         android:layout_marginTop="4dp"
         android:contentDescription="@string/detail"
         android:src="@drawable/ic_baseline_chevron_right_24"
-        android:tint="@color/amethyst_700"
+        android:tint="@color/amethyst_400"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/img_avatar"
         tools:ignore="UseAppTint" />
