@@ -23,5 +23,10 @@
         android:id="@+id/detailActivity"
         android:name="com.example.githubuser.activity.DetailActivity"
         android:label="activity_detail"
-        tools:layout="@layout/activity_detail" />
+        tools:layout="@layout/activity_detail" >
+        <argument
+            android:name="login"
+            app:argType="string"
+            android:defaultValue="yayanrw" />
+    </activity>
 </navigation>
