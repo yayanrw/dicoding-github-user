@@ -6,10 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.githubuser.R
 import com.example.githubuser.adapter.UserAdapter
 import com.example.githubuser.core.ApiConfig
 import com.example.githubuser.databinding.FragmentHomeBinding
@@ -77,7 +75,9 @@ class HomeFragment : Fragment() {
 
         userAdapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {
             override fun onItemClicked(data: UsersResponse) {
-                NavHostFragment.findNavController(this@HomeFragment).navigate(R.id.action_homeFragment_to_detailActivity)
+                val toDetailActivity = HomeFragmentDirections.actionHomeFragmentToDetailActivity()
+                toDetailActivity.login = data.login!!
+                NavHostFragment.findNavController(this@HomeFragment).navigate(toDetailActivity)
             }
         })
     }
