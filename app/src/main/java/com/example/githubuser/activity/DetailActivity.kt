@@ -59,13 +59,18 @@ class DetailActivity : AppCompatActivity() {
             .load(responseBody.avatarUrl)
             .circleCrop()
             .into(binding.imgAvatar)
+        binding.tvCountPublicRepos.text = responseBody.publicRepos.toString()
+        binding.tvCountFollowers.text = responseBody.followers.toString()
+        binding.tvCountFollowing.text = responseBody.following.toString()
     }
 
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) {
             binding.progressBar.visibility = View.VISIBLE
+            binding.lnrContent.visibility = View.GONE
         } else {
             binding.progressBar.visibility = View.GONE
+            binding.lnrContent.visibility = View.VISIBLE
         }
     }
 
