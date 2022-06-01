@@ -1,13 +1,12 @@
 package com.example.githubuser.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.githubuser.R
 import com.example.githubuser.adapter.UserAdapter
 import com.example.githubuser.core.ApiConfig
 import com.example.githubuser.databinding.FragmentHomeBinding
@@ -27,17 +26,24 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        setHasOptionsMenu(true)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
         getUsers()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.option_menu, menu)
+        return super.onCreateOptionsMenu(menu, inflater)
     }
 
     private fun getUsers() {
@@ -80,7 +86,6 @@ class HomeFragment : Fragment() {
             }
         })
     }
-
 
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) {
