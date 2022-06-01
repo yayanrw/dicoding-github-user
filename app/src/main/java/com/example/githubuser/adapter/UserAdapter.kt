@@ -9,6 +9,12 @@ import com.example.githubuser.model.UsersResponse
 
 class UserAdapter(private val listUser: ArrayList<UsersResponse>) :
     RecyclerView.Adapter<UserAdapter.ListViewHolder>() {
+    private lateinit var onItemClickCallback: OnItemClickCallback
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+
     class ListViewHolder(var binding: ItemUsersBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -23,7 +29,12 @@ class UserAdapter(private val listUser: ArrayList<UsersResponse>) :
             .load(listUser[position].avatarUrl)
             .circleCrop()
             .into(holder.binding.imgAvatar)
+        holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(listUser[holder.adapterPosition])}
     }
 
     override fun getItemCount(): Int = listUser.size
+
+    interface OnItemClickCallback {
+        fun onItemClicked(data: UsersResponse)
+    }
 }
