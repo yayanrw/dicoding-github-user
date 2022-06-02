@@ -1,6 +1,7 @@
 package com.example.githubuser.activity
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -22,9 +23,18 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val args: DetailActivityArgs by navArgs()
-        binding.tvLogin.text = args.login
-
+        setActionBar(args.login)
         getUserDetail(args.login)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            androidx.appcompat.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun getUserDetail(login: String) {
@@ -52,8 +62,22 @@ class DetailActivity : AppCompatActivity() {
         })
     }
 
+    private fun setActionBar(login: String) {
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
+            title = login
+            elevation = 0.0F
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
+    }
+
     private fun setUi(responseBody: UserDetailResponse) {
-        binding.tvLogin.text = responseBody.login
+        binding.tvLocation.text = responseBody.location
         binding.tvName.text = responseBody.name
         Glide.with(this@DetailActivity)
             .load(responseBody.avatarUrl)
