@@ -1,12 +1,16 @@
 package com.example.githubuser.activity
 
+import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.navArgs
 import com.bumptech.glide.Glide
+import com.example.githubuser.R
 import com.example.githubuser.core.ApiConfig
 import com.example.githubuser.databinding.ActivityDetailBinding
 import com.example.githubuser.model.UserDetailResponse
@@ -17,6 +21,7 @@ import retrofit2.Response
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
@@ -62,10 +67,12 @@ class DetailActivity : AppCompatActivity() {
         })
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun setActionBar(login: String) {
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
+            setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.midnight_blue_800, theme)))
             title = login
             elevation = 0.0F
         }
