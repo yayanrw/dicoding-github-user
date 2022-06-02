@@ -53,9 +53,9 @@
                     tools:text="@tools:sample/full_names" />
 
                 <TextView
-                    android:id="@+id/tv_login"
-                    style="@style/TextContent.SubTitle.Big"
-                    tools:text="@tools:sample/first_names" />
+                    android:id="@+id/tv_location"
+                    style="@style/TextContent.SubTitle"
+                    tools:text="@tools:sample/cities" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
