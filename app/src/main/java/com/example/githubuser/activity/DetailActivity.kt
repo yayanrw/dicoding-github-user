@@ -90,6 +90,7 @@ class DetailActivity : AppCompatActivity() {
             .load(responseBody.avatarUrl)
             .circleCrop()
             .into(binding.imgAvatar)
+        binding.tvBio.text = responseBody.bio.toString()
         binding.tvCountPublicRepos.text = responseBody.publicRepos.toString()
         binding.tvCountFollowers.text = responseBody.followers.toString()
         binding.tvCountFollowing.text = responseBody.following.toString()

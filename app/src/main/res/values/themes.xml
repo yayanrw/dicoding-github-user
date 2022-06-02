@@ -10,7 +10,7 @@
         <item name="colorSecondaryVariant">@color/amethyst_400</item>
         <item name="colorOnSecondary">@color/midnight_blue_800</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l" tools:ignore="ObsoleteSdkInt">?attr/colorPrimaryVariant</item>
         <item name="android:textColorSecondary">@color/white</item>
         <!-- Customize your theme here. -->
     </style>
@@ -32,6 +32,11 @@
 
     <style name="TextContent.SubTitle">
         <item name="android:textColor">@color/amethyst_400</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextContent.SubTitle.Light">
+        <item name="android:textColor">@color/amethyst_200</item>
         <item name="android:textSize">14sp</item>
     </style>
 
