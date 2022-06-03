@@ -21,4 +21,14 @@ interface ApiService {
     fun fetchUserSearch(
         @Query("q") query: String
     ): Call<UserSearchResponse>
+
+    @GET("users/{login}/followers")
+    fun fetchFollowers(
+        @Path("login") login: String
+    ): Call<ArrayList<UsersResponse>>
+
+    @GET("users/{login}/following")
+    fun fetchFollowing(
+        @Path("login") login: String
+    ): Call<ArrayList<UsersResponse>>
 }
