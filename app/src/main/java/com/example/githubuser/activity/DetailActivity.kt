@@ -34,13 +34,14 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
 
         binding.imgbOpenOnGithub.setOnClickListener(this)
 
+        val args: DetailActivityArgs by navArgs()
+
         val sectionsPagerAdapter = SectionsPagerAdapter(this)
         binding.viewPager.adapter = sectionsPagerAdapter
         TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
 
-        val args: DetailActivityArgs by navArgs()
         setActionBar(args.login)
         getUserDetail(args.login)
     }
