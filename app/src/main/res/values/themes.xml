@@ -89,4 +89,11 @@
         <item name="android:textColor">@color/amethyst_200</item>
     </style>
 
+    <style name="ImageButton">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="backgroundTint">#00FFFFFF</item>
+        <item name="tint">@color/amethyst_200</item>
+    </style>
+
 </resources>
