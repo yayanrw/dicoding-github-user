@@ -99,7 +99,7 @@ class DetailActivity : AppCompatActivity() {
             .into(binding.imgAvatar)
         binding.tvBio.text = (responseBody.bio ?: getString(R.string.no_bio)).toString()
         binding.tvCompany.text =
-            (responseBody.company == "" ?: getString(R.string.no_company)).toString()
+            (responseBody.company ?: getString(R.string.no_company)).toString()
         binding.tvBlog.text = (responseBody.blog ?: getString(R.string.no_blog)).toString()
         binding.tvCountPublicRepos.text = responseBody.publicRepos.toString()
         binding.tvCountFollowers.text = responseBody.followers.toString()
