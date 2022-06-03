@@ -1,7 +1,6 @@
 package com.example.githubuser.activity
 
 import android.content.Intent
-import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
@@ -10,13 +9,16 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.navArgs
 import com.bumptech.glide.Glide
 import com.example.githubuser.R
+import com.example.githubuser.adapter.SectionsPagerAdapter
 import com.example.githubuser.core.ApiConfig
 import com.example.githubuser.databinding.ActivityDetailBinding
 import com.example.githubuser.model.UserDetailResponse
+import com.google.android.material.tabs.TabLayoutMediator
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,6 +33,12 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(binding.root)
 
         binding.imgbOpenOnGithub.setOnClickListener(this)
+
+        val sectionsPagerAdapter = SectionsPagerAdapter(this)
+        binding.viewPager.adapter = sectionsPagerAdapter
+        TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
+            tab.text = resources.getString(TAB_TITLES[position])
+        }.attach()
 
         val args: DetailActivityArgs by navArgs()
         setActionBar(args.login)
@@ -139,5 +147,13 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
                 startActivity(openGithub)
             }
         }
+    }
+
+    companion object {
+        @StringRes
+        private val TAB_TITLES = intArrayOf(
+            R.string.followers,
+            R.string.following
+        )
     }
 }
