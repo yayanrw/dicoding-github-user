@@ -1,6 +1,7 @@
 package com.example.githubuser.activity
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
@@ -102,9 +103,14 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
             .circleCrop()
             .into(binding.imgAvatar)
         binding.tvBio.text = (responseBody.bio ?: getString(R.string.no_bio)).toString()
-        binding.tvCompany.text =
-            (responseBody.company ?: getString(R.string.no_company)).toString()
-        binding.tvBlog.text = (responseBody.blog ?: getString(R.string.no_blog)).toString()
+
+        if (responseBody.blog?.isEmpty() == true) {
+            binding.tvBlog.text = getString(R.string.no_blog)
+        } else {
+            binding.tvBlog.text = responseBody.blog.toString()
+        }
+
+        binding.tvCompany.text = (responseBody.company ?: getString(R.string.no_company)).toString()
         binding.tvCountPublicRepos.text = responseBody.publicRepos.toString()
         binding.tvCountFollowers.text = responseBody.followers.toString()
         binding.tvCountFollowing.text = responseBody.following.toString()
