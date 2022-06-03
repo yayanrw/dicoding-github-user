@@ -1,6 +1,8 @@
 package com.example.githubuser.activity
 
+import android.content.Intent
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
@@ -18,7 +20,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DetailActivity : AppCompatActivity() {
+class DetailActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityDetailBinding
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -26,6 +28,8 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.btnViewOnGithub.setOnClickListener(this)
 
         val args: DetailActivityArgs by navArgs()
         setActionBar(args.login)
@@ -104,6 +108,7 @@ class DetailActivity : AppCompatActivity() {
         binding.tvCountPublicRepos.text = responseBody.publicRepos.toString()
         binding.tvCountFollowers.text = responseBody.followers.toString()
         binding.tvCountFollowing.text = responseBody.following.toString()
+        binding.tvLinkGithub.text = responseBody.htmlUrl
     }
 
     private fun showLoading(isLoading: Boolean) {
@@ -118,5 +123,15 @@ class DetailActivity : AppCompatActivity() {
 
     private fun showToast(messages: String) {
         Toast.makeText(this@DetailActivity, messages, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.btn_view_on_github -> {
+                val url = binding.tvLinkGithub.text.toString()
+                val openGithub = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                startActivity(openGithub)
+            }
+        }
     }
 }
