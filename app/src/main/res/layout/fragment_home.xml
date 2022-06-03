@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/midnight_blue_800"
-    android:paddingHorizontal="16dp"
-    tools:context=".fragment.HomeFragment">
+    android:paddingHorizontal="16dp">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_github_users"
