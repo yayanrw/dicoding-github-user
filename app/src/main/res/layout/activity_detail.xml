@@ -13,6 +13,7 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,14 +64,73 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="16dp"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv_bio"
                 style="@style/TextContent.SubTitle.Light"
-                tools:text="@tools:sample/lorem/random"
-                android:maxLines="5"/>
+                android:maxLines="5"
+                tools:text="@tools:sample/lorem/random" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <ImageView
+                    android:id="@+id/img_icon_company"
+                    style="@style/IconSmall"
+                    android:contentDescription="@string/company"
+                    android:src="@drawable/ic_baseline_apartment_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_company"
+                    style="@style/TextContent.SubTitle.Light"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/img_icon_company"
+                    app:layout_constraintStart_toEndOf="@+id/img_icon_company"
+                    app:layout_constraintTop_toTopOf="@+id/img_icon_company"
+                    tools:text="@tools:sample/lorem" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <ImageView
+                    android:id="@+id/img_icon_link"
+                    style="@style/IconSmall"
+                    android:contentDescription="@string/link_blog"
+                    android:src="@drawable/ic_baseline_link_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_blog"
+                    style="@style/TextContent.SubTitle.Light"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:textStyle=""
+                    app:layout_constraintBottom_toBottomOf="@+id/img_icon_link"
+                    app:layout_constraintStart_toEndOf="@+id/img_icon_link"
+                    app:layout_constraintTop_toTopOf="@+id/img_icon_link"
+                    tools:text="@tools:sample/lorem" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/btn_view_on_github"
+                style="@style/Button.Primary"
+                android:layout_marginTop="6dp"
+                android:text="@string/view_on_github" />
 
         </LinearLayout>
 
@@ -89,7 +149,7 @@
 
                 <TextView
                     android:id="@+id/tv_count_public_repos"
-                    style="@style/TextCenterHorizontal.Title"
+                    style="@style/TextCenterHorizontal.Title.Big"
                     android:text="@string/_0" />
 
                 <TextView
@@ -106,7 +166,7 @@
 
                 <TextView
                     android:id="@+id/tv_count_followers"
-                    style="@style/TextCenterHorizontal.Title"
+                    style="@style/TextCenterHorizontal.Title.Big"
                     android:text="@string/_0" />
 
                 <TextView
@@ -123,7 +183,7 @@
 
                 <TextView
                     android:id="@+id/tv_count_following"
-                    style="@style/TextCenterHorizontal.Title"
+                    style="@style/TextCenterHorizontal.Title.Big"
                     android:text="@string/_0" />
 
                 <TextView

@@ -56,6 +56,10 @@
         <item name="android:textColor">@color/amethyst_200</item>
     </style>
 
+    <style name="TextCenterHorizontal.Title.Big">
+        <item name="android:textSize">18sp</item>
+    </style>
+
     <style name="TextCenterHorizontal.SubTitle">
         <item name="android:textColor">@color/amethyst_400</item>
         <item name="android:textSize">14sp</item>
@@ -69,6 +73,20 @@
     <style name="AvatarBig">
         <item name="android:layout_width">64dp</item>
         <item name="android:layout_height">64dp</item>
+    </style>
+
+    <style name="IconSmall">
+        <item name="android:layout_width">16dp</item>
+        <item name="android:layout_height">16dp</item>
+        <item name="android:tint">@color/amethyst_200</item>
+    </style>
+
+    <style name="Button.Primary" parent="ThemeOverlay.AppCompat">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="colorAccent">@color/amethyst_700</item>
+        <item name="android:backgroundTint">@color/amethyst_700</item>
+        <item name="android:textColor">@color/amethyst_200</item>
     </style>
 
 </resources>

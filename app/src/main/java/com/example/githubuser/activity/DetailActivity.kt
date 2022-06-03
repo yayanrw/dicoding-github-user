@@ -72,7 +72,14 @@ class DetailActivity : AppCompatActivity() {
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
-            setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.midnight_blue_800, theme)))
+            setBackgroundDrawable(
+                ColorDrawable(
+                    resources.getColor(
+                        R.color.midnight_blue_800,
+                        theme
+                    )
+                )
+            )
             title = login
             elevation = 0.0F
         }
@@ -90,7 +97,10 @@ class DetailActivity : AppCompatActivity() {
             .load(responseBody.avatarUrl)
             .circleCrop()
             .into(binding.imgAvatar)
-        binding.tvBio.text = responseBody.bio.toString()
+        binding.tvBio.text = (responseBody.bio ?: getString(R.string.no_bio)).toString()
+        binding.tvCompany.text =
+            (responseBody.company == "" ?: getString(R.string.no_company)).toString()
+        binding.tvBlog.text = (responseBody.blog ?: getString(R.string.no_blog)).toString()
         binding.tvCountPublicRepos.text = responseBody.publicRepos.toString()
         binding.tvCountFollowers.text = responseBody.followers.toString()
         binding.tvCountFollowing.text = responseBody.following.toString()
