@@ -29,7 +29,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnViewOnGithub.setOnClickListener(this)
+        binding.imgbOpenOnGithub.setOnClickListener(this)
 
         val args: DetailActivityArgs by navArgs()
         setActionBar(args.login)
@@ -127,7 +127,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.btn_view_on_github -> {
+            R.id.imgb_open_on_github -> {
                 val url = binding.tvLinkGithub.text.toString()
                 val openGithub = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                 startActivity(openGithub)

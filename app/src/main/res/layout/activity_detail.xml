@@ -40,6 +40,7 @@
                 tools:src="@tools:sample/avatars" />
 
             <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -51,6 +52,7 @@
                 <TextView
                     android:id="@+id/tv_name"
                     style="@style/TextContent.Title.Big"
+                    android:maxLines="1"
                     tools:text="@tools:sample/full_names" />
 
                 <TextView
@@ -58,6 +60,17 @@
                     style="@style/TextContent.SubTitle"
                     tools:text="@tools:sample/cities" />
             </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/imgb_open_on_github"
+                style="@style/ImageButton"
+                android:contentDescription="@string/view_on_github"
+                android:src="@drawable/ic_baseline_open_in_new_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/linearLayout"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -125,12 +138,6 @@
                     tools:text="@tools:sample/lorem" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <Button
-                android:id="@+id/btn_view_on_github"
-                style="@style/Button.Primary"
-                android:layout_marginTop="6dp"
-                android:text="@string/view_on_github" />
 
             <TextView
                 android:id="@+id/tv_link_github"
