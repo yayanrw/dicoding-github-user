@@ -56,9 +56,7 @@ class FollowingFragment : Fragment() {
 
         userAdapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {
             override fun onItemClicked(data: UsersResponse) {
-//                val toDetailActivity = HomeFragmentDirections.actionHomeFragmentToDetailActivity()
-//                toDetailActivity.login = data.login!!
-//                NavHostFragment.findNavController(this@FollowersFragment).navigate(toDetailActivity)
+//            do nothing
             }
         })
     }
