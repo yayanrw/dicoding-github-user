@@ -15,9 +15,6 @@ class MainViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    private val _isError = MutableLiveData<Boolean>()
-    val isError: LiveData<Boolean> = _isError
-
     private val _errorMsg = MutableLiveData<String>()
     val errorMsg: LiveData<String> = _errorMsg
 
@@ -43,7 +40,6 @@ class MainViewModel : ViewModel() {
                         _users.value = responseBody
                     }
                 } else {
-                    _isError.value = true
                     _errorMsg.value = response.message()
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
@@ -51,7 +47,6 @@ class MainViewModel : ViewModel() {
 
             override fun onFailure(call: Call<ArrayList<UsersResponse>>, t: Throwable) {
                 _isLoading.value = false
-                _isError.value = true
                 _errorMsg.value = t.message.toString()
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
@@ -74,7 +69,6 @@ class MainViewModel : ViewModel() {
                         _users.value = responseBody.items!!
                     }
                 } else {
-                    _isError.value = true
                     _errorMsg.value = response.message()
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
@@ -82,7 +76,6 @@ class MainViewModel : ViewModel() {
 
             override fun onFailure(call: Call<UserSearchResponse?>, t: Throwable) {
                 _isLoading.value = false
-                _isError.value = true
                 _errorMsg.value = t.message.toString()
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
