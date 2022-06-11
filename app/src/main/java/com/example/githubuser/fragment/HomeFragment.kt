@@ -5,23 +5,21 @@ import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.R
 import com.example.githubuser.adapter.UserAdapter
-import com.example.githubuser.core.ApiConfig
 import com.example.githubuser.databinding.FragmentHomeBinding
-import com.example.githubuser.model.UserSearchResponse
 import com.example.githubuser.model.UsersResponse
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.githubuser.viewmodel.MainViewModel
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var userAdapter: UserAdapter
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +32,16 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getUsers()
+
+        mainViewModel.isLoading.observe(viewLifecycleOwner) {
+            showLoading(it)
+        }
+        mainViewModel.errorMsg.observe(viewLifecycleOwner) {
+            showToast(it)
+        }
+        mainViewModel.users.observe(viewLifecycleOwner) {
+            setupRV(it)
+        }
     }
 
     override fun onDestroy() {
@@ -49,7 +56,7 @@ class HomeFragment : Fragment() {
         searchView.queryHint = getString(R.string.search)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                query?.let { getUserSearch(it) }
+                query?.let { mainViewModel.getUserSearch(it) }
                 return false
             }
 
@@ -64,63 +71,10 @@ class HomeFragment : Fragment() {
             }
 
             override fun onViewDetachedFromWindow(v: View?) {
-                getUsers()
+                mainViewModel.getUsers()
             }
         })
         super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    private fun getUsers() {
-        showLoading(true)
-        val client = ApiConfig.getApiService().fetchUsers()
-        client.enqueue(object : Callback<ArrayList<UsersResponse>> {
-            override fun onResponse(
-                call: Call<ArrayList<UsersResponse>>,
-                response: Response<ArrayList<UsersResponse>>
-            ) {
-                showLoading(false)
-                if (response.isSuccessful) {
-                    val responseBody = response.body()
-                    if (responseBody != null) {
-                        setupRV(responseBody)
-                    }
-                } else {
-                    showToast(response.message())
-                }
-            }
-
-            override fun onFailure(call: Call<ArrayList<UsersResponse>>, t: Throwable) {
-                showLoading(false)
-                showToast(t.message.toString())
-            }
-        })
-    }
-
-    private fun getUserSearch(query: String) {
-        showLoading(true)
-        val client = ApiConfig.getApiService().fetchUserSearch(query)
-
-        client.enqueue(object : Callback<UserSearchResponse?> {
-            override fun onResponse(
-                call: Call<UserSearchResponse?>,
-                response: Response<UserSearchResponse?>
-            ) {
-                showLoading(false)
-                if (response.isSuccessful) {
-                    val responseBody = response.body()
-                    if (responseBody != null) {
-                        setupRV(responseBody.items!!)
-                    }
-                } else {
-                    showToast(response.message())
-                }
-            }
-
-            override fun onFailure(call: Call<UserSearchResponse?>, t: Throwable) {
-                showLoading(false)
-                showToast(t.message.toString())
-            }
-        })
     }
 
     private fun setupRV(listGithubUser: ArrayList<UsersResponse>?) {
