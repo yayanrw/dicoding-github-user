@@ -34,14 +34,8 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         binding.imgbOpenOnGithub.setOnClickListener(this)
 
         val args: DetailActivityArgs by navArgs()
-
-        val sectionsPagerAdapter = SectionsPagerAdapter(this)
-        binding.viewPager.adapter = sectionsPagerAdapter
-        TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
-            tab.text = resources.getString(TAB_TITLES[position])
-        }.attach()
-
         setActionBar(args.login)
+        setViewPager()
 
         detailViewModel.isLoading.observe(this) {
             showLoading(it)
@@ -86,6 +80,14 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return super.onSupportNavigateUp()
+    }
+
+    private fun setViewPager() {
+        val sectionsPagerAdapter = SectionsPagerAdapter(this)
+        binding.viewPager.adapter = sectionsPagerAdapter
+        TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
+            tab.text = resources.getString(TAB_TITLES[position])
+        }.attach()
     }
 
     private fun setUi(responseBody: UserDetailResponse) {
