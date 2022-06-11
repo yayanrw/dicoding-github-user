@@ -18,6 +18,9 @@ class DetailViewModel : ViewModel() {
     private val _followersIsLoading = MutableLiveData<Boolean>()
     val followersIsLoading: LiveData<Boolean> = _followersIsLoading
 
+    private val _followingIsLoading = MutableLiveData<Boolean>()
+    val followingIsLoading: LiveData<Boolean> = _followingIsLoading
+
     private val _errorMsg = MutableLiveData<String>()
     val errorMsg: LiveData<String> = _errorMsg
 
@@ -26,6 +29,9 @@ class DetailViewModel : ViewModel() {
 
     private val _followers = MutableLiveData<ArrayList<UsersResponse>?>()
     val followers: LiveData<ArrayList<UsersResponse>?> = _followers
+
+    private val _following = MutableLiveData<ArrayList<UsersResponse>?>()
+    val following: LiveData<ArrayList<UsersResponse>?> = _following
 
     fun getUserDetail(login: String) {
         _isLoading.value = true
@@ -77,6 +83,34 @@ class DetailViewModel : ViewModel() {
 
             override fun onFailure(call: Call<ArrayList<UsersResponse>>, t: Throwable) {
                 _followersIsLoading.value = false
+                _errorMsg.value = t.message.toString()
+                Log.e(TAG, "onFailure: ${t.message.toString()}")
+            }
+        })
+    }
+
+    fun getFollowing(login: String) {
+        _followingIsLoading.value = true
+        val client = ApiConfig.getApiService().fetchFollowing(login)
+        client.enqueue(object : Callback<ArrayList<UsersResponse>> {
+            override fun onResponse(
+                call: Call<ArrayList<UsersResponse>>,
+                response: Response<ArrayList<UsersResponse>>
+            ) {
+                _followingIsLoading.value = false
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    if (responseBody != null) {
+                        _following.value = responseBody
+                    }
+                } else {
+                    _errorMsg.value = response.message()
+                    Log.e(TAG, "onFailure: ${response.message()}")
+                }
+            }
+
+            override fun onFailure(call: Call<ArrayList<UsersResponse>>, t: Throwable) {
+                _followingIsLoading.value = false
                 _errorMsg.value = t.message.toString()
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
