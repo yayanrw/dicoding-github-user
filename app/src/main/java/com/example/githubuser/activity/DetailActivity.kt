@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
@@ -15,16 +16,14 @@ import androidx.navigation.navArgs
 import com.bumptech.glide.Glide
 import com.example.githubuser.R
 import com.example.githubuser.adapter.SectionsPagerAdapter
-import com.example.githubuser.core.ApiConfig
 import com.example.githubuser.databinding.ActivityDetailBinding
 import com.example.githubuser.model.UserDetailResponse
+import com.example.githubuser.viewmodel.DetailViewModel
 import com.google.android.material.tabs.TabLayoutMediator
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class DetailActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityDetailBinding
+    private val detailViewModel: DetailViewModel by viewModels()
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +42,17 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         }.attach()
 
         setActionBar(args.login)
-        getUserDetail(args.login)
+
+        detailViewModel.isLoading.observe(this) {
+            showLoading(it)
+        }
+        detailViewModel.errorMsg.observe(this) {
+            showToast(it)
+        }
+        detailViewModel.userDetail.observe(this) {
+            it?.let { it1 -> setUi(it1) }
+        }
+        detailViewModel.getUserDetail(args.login)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -54,31 +63,6 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun getUserDetail(login: String) {
-        showLoading(true)
-        val client = ApiConfig.getApiService().fetchUserDetail(login)
-        client.enqueue(object : Callback<UserDetailResponse?> {
-            override fun onResponse(
-                call: Call<UserDetailResponse?>,
-                response: Response<UserDetailResponse?>
-            ) {
-                showLoading(false)
-                if (response.isSuccessful) {
-                    val responseBody = response.body()
-                    if (responseBody != null) {
-                        setUi(responseBody)
-                    }
-                } else {
-                    showToast(response.message())
-                }
-            }
-
-            override fun onFailure(call: Call<UserDetailResponse?>, t: Throwable) {
-                showToast(t.message.toString())
-            }
-        })
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
