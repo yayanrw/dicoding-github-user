@@ -18,6 +18,12 @@
             app:launchSingleTop="true"
             app:popEnterAnim="@anim/nav_default_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_homeFragment_to_favoriteUsersFragment"
+            app:destination="@id/favoriteUsersFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
     </fragment>
     <activity
         android:id="@+id/detailActivity"
