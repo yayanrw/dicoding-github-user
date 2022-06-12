@@ -52,15 +52,15 @@ class HomeFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.favorite_users_action -> {
-                val toFavoriteUsersFragment =
-                    HomeFragmentDirections.actionHomeFragmentToFavoriteUsersFragment()
+                val toFavoriteUsersActivity =
+                    HomeFragmentDirections.actionHomeFragmentToFavoriteUsersActivity()
                 NavHostFragment.findNavController(this@HomeFragment)
-                    .navigate(toFavoriteUsersFragment)
+                    .navigate(toFavoriteUsersActivity)
                 return true
             }
             R.id.setting_action -> {
-                val toSettingFragment = HomeFragmentDirections.actionHomeFragmentToSettingFragment()
-                NavHostFragment.findNavController(this@HomeFragment).navigate(toSettingFragment)
+                val toSettingSetting = HomeFragmentDirections.actionHomeFragmentToSettingActivity()
+                NavHostFragment.findNavController(this@HomeFragment).navigate(toSettingSetting)
                 return true
             }
             else -> return false

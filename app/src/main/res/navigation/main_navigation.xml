@@ -16,14 +16,22 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:launchSingleTop="true"
-            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
-            android:id="@+id/action_homeFragment_to_favoriteUsersFragment"
-            app:destination="@id/favoriteUsersFragment" />
+            android:id="@+id/action_homeFragment_to_favoriteUsersActivity"
+            app:destination="@id/favoriteUsersActivity"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
-            android:id="@+id/action_homeFragment_to_settingFragment"
-            app:destination="@id/settingFragment" />
+            android:id="@+id/action_homeFragment_to_settingActivity"
+            app:destination="@id/settingActivity"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <activity
         android:id="@+id/detailActivity"
@@ -35,14 +43,14 @@
             android:defaultValue="yayanrw"
             app:argType="string" />
     </activity>
-    <fragment
-        android:id="@+id/favoriteUsersFragment"
-        android:name="com.example.githubuser.ui.fragment.FavoriteUsersFragment"
-        android:label="fragment_favorite_users"
-        tools:layout="@layout/fragment_favorite_users" />
-    <fragment
-        android:id="@+id/settingFragment"
-        android:name="com.example.githubuser.ui.fragment.SettingFragment"
-        android:label="fragment_setting"
-        tools:layout="@layout/fragment_setting" />
+    <activity
+        android:id="@+id/favoriteUsersActivity"
+        android:name="com.example.githubuser.ui.activity.FavoriteUsersActivity"
+        android:label="activity_favorite_users"
+        tools:layout="@layout/activity_favorite_users" />
+    <activity
+        android:id="@+id/settingActivity"
+        android:name="com.example.githubuser.ui.activity.SettingActivity"
+        android:label="activity_setting"
+        tools:layout="@layout/activity_setting" />
 </navigation>
