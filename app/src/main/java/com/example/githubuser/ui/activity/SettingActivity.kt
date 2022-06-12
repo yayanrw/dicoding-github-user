@@ -1,11 +1,8 @@
 package com.example.githubuser.ui.activity
 
 import android.content.Context
-import android.graphics.drawable.ColorDrawable
-import android.os.Build
 import android.os.Bundle
 import android.widget.CompoundButton
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.datastore.core.DataStore
@@ -21,14 +18,24 @@ import com.example.githubuser.viewmodel.ViewModelFactory
 class SettingActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySettingBinding
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+    private lateinit var settingViewModel: SettingViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setActionBar()
+        setupTheme()
+
+        binding.switchTheme.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+            settingViewModel.saveThemeSetting(isChecked)
+        }
+    }
+
+    private fun setupTheme() {
         val pref = SettingPreferences.getInstance(dataStore)
-        val settingViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
+        settingViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
             SettingViewModel::class.java
         )
 
@@ -36,18 +43,12 @@ class SettingActivity : AppCompatActivity() {
             this
         ) { isDarkModeActive: Boolean ->
             if (isDarkModeActive) {
-                setActionBar(true)
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 binding.switchTheme.isChecked = true
             } else {
-                setActionBar(false)
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 binding.switchTheme.isChecked = false
             }
-        }
-
-        binding.switchTheme.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
-            settingViewModel.saveThemeSetting(isChecked)
         }
     }
 
@@ -56,32 +57,14 @@ class SettingActivity : AppCompatActivity() {
         return super.onSupportNavigateUp()
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
-    private fun setActionBar(isDarkMode: Boolean) {
+    private fun setActionBar() {
         supportActionBar?.apply {
-            if (isDarkMode) {
-                setBackgroundDrawable(
-                    ColorDrawable(
-                        resources.getColor(
-                            R.color.midnight_blue_800,
-                            theme
-                        )
-                    )
-                )
-            } else {
-                setBackgroundDrawable(
-                    ColorDrawable(
-                        resources.getColor(
-                            R.color.amethyst_700,
-                            theme
-                        )
-                    )
-                )
-            }
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
             title = getString(R.string.setting)
             elevation = 0.0F
         }
     }
+
+
 }
