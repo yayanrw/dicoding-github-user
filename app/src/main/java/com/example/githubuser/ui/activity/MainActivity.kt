@@ -1,9 +1,7 @@
 package com.example.githubuser.ui.activity
 
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.datastore.core.DataStore
@@ -21,7 +19,6 @@ class MainActivity : AppCompatActivity() {
 
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -48,7 +45,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun setActionBar() {
         supportActionBar?.apply {
             elevation = 0.0F
