@@ -18,4 +18,5 @@
     <string name="favorite_users">Favorite Users</string>
     <string name="setting">Setting</string>
     <string name="favorite_unfavorite">Favorite/UnFavorite</string>
+    <string name="dark_mode">Dark Mode</string>
 </resources>
