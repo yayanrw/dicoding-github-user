@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/midnight_blue_800"
-        tools:context=".activity.DetailActivity">
+        tools:context=".ui.activity.DetailActivity">
 
         <ProgressBar
             android:id="@+id/progressBar"

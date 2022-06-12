@@ -16,10 +16,10 @@
         android:theme="@style/Theme.GithubUser"
         tools:targetApi="31">
         <activity
-            android:name=".activity.DetailActivity"
+            android:name="com.example.githubuser.ui.activity.DetailActivity"
             android:exported="false"/>
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.example.githubuser.ui.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

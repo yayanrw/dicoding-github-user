@@ -1,4 +1,4 @@
-package com.example.githubuser.activity
+package com.example.githubuser.ui.activity
 
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
