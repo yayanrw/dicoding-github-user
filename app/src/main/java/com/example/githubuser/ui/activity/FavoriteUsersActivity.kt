@@ -12,6 +12,7 @@ class FavoriteUsersActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityFavoriteUsersBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setActionBar()
     }
 
     override fun onSupportNavigateUp(): Boolean {
