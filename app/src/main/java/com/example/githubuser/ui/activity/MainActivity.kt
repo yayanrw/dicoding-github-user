@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -20,6 +19,8 @@ import com.example.githubuser.viewmodel.ViewModelFactory
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var settingViewModel: SettingViewModel
+
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -27,10 +28,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setActionBar()
 
         val pref = SettingPreferences.getInstance(dataStore)
-        val settingViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
+        settingViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
             SettingViewModel::class.java
         )
 
@@ -38,24 +38,37 @@ class MainActivity : AppCompatActivity() {
             this
         ) { isDarkModeActive: Boolean ->
             if (isDarkModeActive) {
+                setActionBar(true)
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             } else {
+                setActionBar(false)
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
-    private fun setActionBar() {
+    private fun setActionBar(isDarkMode: Boolean) {
         supportActionBar?.apply {
-//            setBackgroundDrawable(
-//                ColorDrawable(
-//                    resources.getColor(
-//                        R.color.midnight_blue_800,
-//                        theme
-//                    )
-//                )
-//            )
+            if (isDarkMode) {
+                setBackgroundDrawable(
+                    ColorDrawable(
+                        resources.getColor(
+                            R.color.midnight_blue_800,
+                            theme
+                        )
+                    )
+                )
+            } else {
+                setBackgroundDrawable(
+                    ColorDrawable(
+                        resources.getColor(
+                            R.color.amethyst_700,
+                            theme
+                        )
+                    )
+                )
+            }
             elevation = 0.0F
         }
     }
