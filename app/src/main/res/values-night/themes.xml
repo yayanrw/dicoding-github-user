@@ -57,4 +57,10 @@
         <item name="backgroundTint">#00FFFFFF</item>
         <item name="tint">@color/amethyst_200</item>
     </style>
+
+    <style name="TabsCustom">
+        <item name="android:background">@color/midnight_blue_800</item>
+        <item name="tabTextColor">@color/amethyst_200</item>
+        <item name="tabIndicatorColor">@color/amethyst_400</item>
+    </style>
 </resources>

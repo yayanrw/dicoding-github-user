@@ -215,11 +215,10 @@
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabs"
+                style="@style/TabsCustom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@color/amethyst_700"
-                app:tabTextColor="@color/white" />
+                android:layout_marginTop="16dp" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/view_pager"
