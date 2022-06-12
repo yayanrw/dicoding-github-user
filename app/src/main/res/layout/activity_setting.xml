@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            style="@style/TextContent.Title.Big"
+            style="@style/TextContent.Title"
             android:layout_weight="1"
             android:text="@string/dark_mode"
             android:layout_width="0dp" />

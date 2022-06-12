@@ -27,8 +27,6 @@ class SettingActivity : AppCompatActivity() {
         binding = ActivitySettingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setActionBar()
-
         val pref = SettingPreferences.getInstance(dataStore)
         val settingViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
             SettingViewModel::class.java
@@ -38,9 +36,11 @@ class SettingActivity : AppCompatActivity() {
             this
         ) { isDarkModeActive: Boolean ->
             if (isDarkModeActive) {
+                setActionBar(true)
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 binding.switchTheme.isChecked = true
             } else {
+                setActionBar(false)
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 binding.switchTheme.isChecked = false
             }
@@ -57,18 +57,29 @@ class SettingActivity : AppCompatActivity() {
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
-    private fun setActionBar() {
+    private fun setActionBar(isDarkMode: Boolean) {
         supportActionBar?.apply {
-            setDisplayHomeAsUpEnabled(true)
-            setDisplayShowHomeEnabled(true)
-            setBackgroundDrawable(
-                ColorDrawable(
-                    resources.getColor(
-                        R.color.midnight_blue_800,
-                        theme
+            if (isDarkMode) {
+                setBackgroundDrawable(
+                    ColorDrawable(
+                        resources.getColor(
+                            R.color.midnight_blue_800,
+                            theme
+                        )
                     )
                 )
-            )
+            } else {
+                setBackgroundDrawable(
+                    ColorDrawable(
+                        resources.getColor(
+                            R.color.amethyst_700,
+                            theme
+                        )
+                    )
+                )
+            }
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
             title = getString(R.string.setting)
             elevation = 0.0F
         }
