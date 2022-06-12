@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
@@ -14,4 +14,6 @@
     <color name="silver_700">#61676a</color>
     <color name="silver_400">#bdc3c7</color>
     <color name="silver_200">#ecf2f6</color>
+
+    <color name="design_dark_default_color_background" tools:ignore="PrivateResource">#2c3e50</color>
 </resources>
