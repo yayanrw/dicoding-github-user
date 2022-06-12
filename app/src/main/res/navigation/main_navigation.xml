@@ -29,4 +29,14 @@
             android:defaultValue="yayanrw"
             app:argType="string" />
     </activity>
+    <fragment
+        android:id="@+id/favoriteUsersFragment"
+        android:name="com.example.githubuser.ui.fragment.FavoriteUsersFragment"
+        android:label="fragment_favorite_users"
+        tools:layout="@layout/fragment_favorite_users" />
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.example.githubuser.ui.fragment.SettingFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" />
 </navigation>
