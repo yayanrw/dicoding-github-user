@@ -3,8 +3,10 @@ package com.example.githubuser.ui.activity
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.widget.CompoundButton
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.githubuser.R
 import com.example.githubuser.databinding.ActivitySettingBinding
 
@@ -17,6 +19,16 @@ class SettingActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setActionBar()
+
+        binding.switchTheme.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+            if (isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                binding.switchTheme.isChecked = true
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                binding.switchTheme.isChecked = false
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

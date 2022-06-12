@@ -25,7 +25,7 @@
             android:layout_width="0dp" />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/switch_dark_mode"
+            android:id="@+id/switch_theme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
