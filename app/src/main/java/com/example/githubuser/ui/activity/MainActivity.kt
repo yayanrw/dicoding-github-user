@@ -1,7 +1,6 @@
 package com.example.githubuser.ui.activity
 
 import android.content.Context
-import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
@@ -11,7 +10,6 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
-import com.example.githubuser.R
 import com.example.githubuser.core.SettingPreferences
 import com.example.githubuser.databinding.ActivityMainBinding
 import com.example.githubuser.viewmodel.SettingViewModel
@@ -29,6 +27,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setActionBar()
+        setupTheme()
+    }
+
+    private fun setupTheme() {
         val pref = SettingPreferences.getInstance(dataStore)
         settingViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
             SettingViewModel::class.java
@@ -38,37 +41,16 @@ class MainActivity : AppCompatActivity() {
             this
         ) { isDarkModeActive: Boolean ->
             if (isDarkModeActive) {
-                setActionBar(true)
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             } else {
-                setActionBar(false)
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
-    private fun setActionBar(isDarkMode: Boolean) {
+    private fun setActionBar() {
         supportActionBar?.apply {
-            if (isDarkMode) {
-                setBackgroundDrawable(
-                    ColorDrawable(
-                        resources.getColor(
-                            R.color.midnight_blue_800,
-                            theme
-                        )
-                    )
-                )
-            } else {
-                setBackgroundDrawable(
-                    ColorDrawable(
-                        resources.getColor(
-                            R.color.amethyst_700,
-                            theme
-                        )
-                    )
-                )
-            }
             elevation = 0.0F
         }
     }

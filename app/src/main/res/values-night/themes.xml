@@ -11,7 +11,12 @@
         <item name="colorOnSecondary">@color/midnight_blue_800</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="actionBarStyle">@style/MyActionBar</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="MyActionBar" parent="Widget.MaterialComponents.ActionBar.Solid">
+        <item name="background">@color/midnight_blue_800</item>
     </style>
 
     <style name="TextContent.Title">
