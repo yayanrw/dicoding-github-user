@@ -9,7 +9,6 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/midnight_blue_800"
         tools:context=".ui.activity.DetailActivity">
 
         <ProgressBar
@@ -220,7 +219,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@color/amethyst_700"
-                app:tabTextColor="@color/amethyst_200" />
+                app:tabTextColor="@color/white" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/view_pager"

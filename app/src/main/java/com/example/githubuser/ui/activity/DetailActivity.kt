@@ -70,14 +70,14 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
-            setBackgroundDrawable(
-                ColorDrawable(
-                    resources.getColor(
-                        R.color.midnight_blue_800,
-                        theme
-                    )
-                )
-            )
+//            setBackgroundDrawable(
+//                ColorDrawable(
+//                    resources.getColor(
+//                        R.color.midnight_blue_800,
+//                        theme
+//                    )
+//                )
+//            )
             title = login
             elevation = 0.0F
         }

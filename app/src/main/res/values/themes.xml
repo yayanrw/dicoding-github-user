@@ -2,9 +2,9 @@
     <!-- Base application theme. -->
     <style name="Theme.GithubUser" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/midnight_blue_800</item>
-        <item name="colorPrimaryVariant">@color/midnight_blue_800</item>
-        <item name="colorOnPrimary">@color/amethyst_400</item>
+        <item name="colorPrimary">@color/amethyst_700</item>
+        <item name="colorPrimaryVariant">@color/amethyst_700</item>
+        <item name="colorOnPrimary">@color/silver_400</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/amethyst_400</item>
         <item name="colorSecondaryVariant">@color/amethyst_400</item>
@@ -21,7 +21,7 @@
     </style>
 
     <style name="TextContent.Title">
-        <item name="android:textColor">@color/amethyst_200</item>
+        <item name="android:textColor">@color/amethyst_700</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
     </style>
@@ -36,7 +36,7 @@
     </style>
 
     <style name="TextContent.SubTitle.Light">
-        <item name="android:textColor">@color/amethyst_200</item>
+        <item name="android:textColor">@color/amethyst_400</item>
         <item name="android:textSize">14sp</item>
     </style>
 
@@ -53,7 +53,7 @@
     <style name="TextCenterHorizontal.Title">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/amethyst_200</item>
+        <item name="android:textColor">@color/amethyst_700</item>
     </style>
 
     <style name="TextCenterHorizontal.Title.Big">
@@ -78,22 +78,14 @@
     <style name="IconSmall">
         <item name="android:layout_width">16dp</item>
         <item name="android:layout_height">16dp</item>
-        <item name="android:tint">@color/amethyst_200</item>
-    </style>
-
-    <style name="Button.Primary" parent="ThemeOverlay.AppCompat">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="colorAccent">@color/amethyst_700</item>
-        <item name="android:backgroundTint">@color/amethyst_700</item>
-        <item name="android:textColor">@color/amethyst_200</item>
+        <item name="android:tint">@color/amethyst_700</item>
     </style>
 
     <style name="ImageButton">
         <item name="android:layout_width">24dp</item>
         <item name="android:layout_height">24dp</item>
         <item name="backgroundTint">#00FFFFFF</item>
-        <item name="tint">@color/amethyst_200</item>
+        <item name="tint">@color/amethyst_700</item>
     </style>
 
 </resources>

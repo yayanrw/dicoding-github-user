@@ -22,14 +22,14 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.M)
     private fun setActionBar() {
         supportActionBar?.apply {
-            setBackgroundDrawable(
-                ColorDrawable(
-                    resources.getColor(
-                        R.color.midnight_blue_800,
-                        theme
-                    )
-                )
-            )
+//            setBackgroundDrawable(
+//                ColorDrawable(
+//                    resources.getColor(
+//                        R.color.midnight_blue_800,
+//                        theme
+//                    )
+//                )
+//            )
             elevation = 0.0F
         }
     }
