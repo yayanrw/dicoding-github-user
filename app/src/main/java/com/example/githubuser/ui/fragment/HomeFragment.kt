@@ -49,8 +49,26 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.favorite_users_action -> {
+                val toFavoriteUsersFragment =
+                    HomeFragmentDirections.actionHomeFragmentToFavoriteUsersFragment()
+                NavHostFragment.findNavController(this@HomeFragment)
+                    .navigate(toFavoriteUsersFragment)
+                return true
+            }
+            R.id.setting_action -> {
+                val toSettingFragment = HomeFragmentDirections.actionHomeFragmentToSettingFragment()
+                NavHostFragment.findNavController(this@HomeFragment).navigate(toSettingFragment)
+                return true
+            }
+            else -> return false
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.search_menu, menu)
+        inflater.inflate(R.menu.option_menu, menu)
         val searchItem = menu.findItem(R.id.search_action)
         val searchView = searchItem.actionView as SearchView
         searchView.queryHint = getString(R.string.search)
