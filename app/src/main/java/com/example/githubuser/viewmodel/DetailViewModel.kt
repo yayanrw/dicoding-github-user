@@ -33,6 +33,9 @@ class DetailViewModel : ViewModel() {
     private val _following = MutableLiveData<ArrayList<UsersResponse>?>()
     val following: LiveData<ArrayList<UsersResponse>?> = _following
 
+    private val _isFavorite = MutableLiveData<Boolean>()
+    val isFavorite: LiveData<Boolean> = _isFavorite
+
     fun getUserDetail(login: String) {
         _isLoading.value = true
         val client = ApiConfig.getApiService().fetchUserDetail(login)
@@ -48,14 +51,22 @@ class DetailViewModel : ViewModel() {
                         _userDetail.value = responseBody
                     }
                 } else {
-                    _errorMsg.value = response.message()
+                    if (response.message().isNullOrEmpty()) {
+                        _errorMsg.value = "An error occurred when processing your request"
+                    } else {
+                        _errorMsg.value = response.message()
+                    }
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
             }
 
             override fun onFailure(call: Call<UserDetailResponse?>, t: Throwable) {
                 _isLoading.value = false
-                _errorMsg.value = t.message.toString()
+                if (t.message.toString().isEmpty()) {
+                    _errorMsg.value = "An error occurred when processing your request"
+                } else {
+                    _errorMsg.value = t.message.toString()
+                }
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
         })
@@ -76,14 +87,22 @@ class DetailViewModel : ViewModel() {
                         _followers.value = responseBody
                     }
                 } else {
-                    _errorMsg.value = response.message()
+                    if (response.message().isNullOrEmpty()) {
+                        _errorMsg.value = "An error occurred when processing your request"
+                    } else {
+                        _errorMsg.value = response.message()
+                    }
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
             }
 
             override fun onFailure(call: Call<ArrayList<UsersResponse>>, t: Throwable) {
                 _followersIsLoading.value = false
-                _errorMsg.value = t.message.toString()
+                if (t.message.toString().isEmpty()) {
+                    _errorMsg.value = "An error occurred when processing your request"
+                } else {
+                    _errorMsg.value = t.message.toString()
+                }
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
         })
@@ -104,17 +123,29 @@ class DetailViewModel : ViewModel() {
                         _following.value = responseBody
                     }
                 } else {
-                    _errorMsg.value = response.message()
+                    if (response.message().isNullOrEmpty()) {
+                        _errorMsg.value = "An error occurred when processing your request"
+                    } else {
+                        _errorMsg.value = response.message()
+                    }
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
             }
 
             override fun onFailure(call: Call<ArrayList<UsersResponse>>, t: Throwable) {
                 _followingIsLoading.value = false
-                _errorMsg.value = t.message.toString()
+                if (t.message.toString().isEmpty()) {
+                    _errorMsg.value = "An error occurred when processing your request"
+                } else {
+                    _errorMsg.value = t.message.toString()
+                }
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
         })
+    }
+
+    fun switchValue(currentValue: Boolean) {
+        _isFavorite.value = !currentValue
     }
 
     companion object {

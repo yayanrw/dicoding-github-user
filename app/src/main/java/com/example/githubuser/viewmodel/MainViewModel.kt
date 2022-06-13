@@ -40,14 +40,22 @@ class MainViewModel : ViewModel() {
                         _users.value = responseBody
                     }
                 } else {
-                    _errorMsg.value = response.message()
+                    if (response.message().isNullOrEmpty()) {
+                        _errorMsg.value = "An error occurred when processing your request"
+                    } else {
+                        _errorMsg.value = response.message()
+                    }
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
             }
 
             override fun onFailure(call: Call<ArrayList<UsersResponse>>, t: Throwable) {
                 _isLoading.value = false
-                _errorMsg.value = t.message.toString()
+                if (t.message.toString().isEmpty()) {
+                    _errorMsg.value = "An error occurred when processing your request"
+                } else {
+                    _errorMsg.value = t.message.toString()
+                }
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
         })
@@ -69,14 +77,22 @@ class MainViewModel : ViewModel() {
                         _users.value = responseBody.items!!
                     }
                 } else {
-                    _errorMsg.value = response.message()
+                    if (response.message().isNullOrEmpty()) {
+                        _errorMsg.value = "An error occurred when processing your request"
+                    } else {
+                        _errorMsg.value = response.message()
+                    }
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
             }
 
             override fun onFailure(call: Call<UserSearchResponse?>, t: Throwable) {
                 _isLoading.value = false
-                _errorMsg.value = t.message.toString()
+                if (t.message.toString().isEmpty()) {
+                    _errorMsg.value = "An error occurred when processing your request"
+                } else {
+                    _errorMsg.value = t.message.toString()
+                }
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
         })
