@@ -22,6 +22,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 class DetailActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityDetailBinding
     private val detailViewModel: DetailViewModel by viewModels()
+    private lateinit var item: MenuItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +38,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.favorite_menu, menu)
+        menuInflater.inflate(R.menu.share_menu, menu)
         return true
     }
 
@@ -46,6 +47,9 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
             androidx.appcompat.R.id.home -> {
                 finish()
                 return true
+            }
+            R.id.favorite_action -> {
+//                detailViewModel.switchValue(false)
             }
         }
         return super.onOptionsItemSelected(item)
@@ -65,6 +69,16 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         return super.onSupportNavigateUp()
     }
 
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.imgb_open_on_github -> {
+                val url = binding.tvLinkGithub.text.toString()
+                val openGithub = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                startActivity(openGithub)
+            }
+        }
+    }
+
     private fun initViewModel(login: String) {
         detailViewModel.isLoading.observe(this) {
             showLoading(it)
@@ -74,6 +88,17 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         }
         detailViewModel.userDetail.observe(this) {
             it?.let { it1 -> setUi(it1) }
+        }
+        detailViewModel.isFavorite.observe(this) {
+            when (item.itemId) {
+                R.id.favorite_action -> {
+                    if (it) {
+                        item.setIcon(R.drawable.ic_baseline_favorite_24)
+                    } else {
+                        item.setIcon(R.drawable.ic_baseline_favorite_border_24)
+                    }
+                }
+            }
         }
         detailViewModel.getUserDetail(login)
     }
@@ -120,16 +145,6 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun showToast(messages: String) {
         Toast.makeText(this@DetailActivity, messages, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.imgb_open_on_github -> {
-                val url = binding.tvLinkGithub.text.toString()
-                val openGithub = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                startActivity(openGithub)
-            }
-        }
     }
 
     companion object {
