@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/favorite_action"
+        android:id="@+id/share_action"
         android:title="@string/favorite_unfavorite"
         android:icon="@drawable/ic_baseline_share_24"
         app:showAsAction="always"/>

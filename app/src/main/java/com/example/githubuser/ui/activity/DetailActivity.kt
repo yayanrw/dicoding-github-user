@@ -22,14 +22,13 @@ import com.google.android.material.tabs.TabLayoutMediator
 class DetailActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityDetailBinding
     private val detailViewModel: DetailViewModel by viewModels()
-    private lateinit var item: MenuItem
+    private val args: DetailActivityArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val args: DetailActivityArgs by navArgs()
         setViewPager()
         setActionBar(args.login)
 
@@ -48,8 +47,26 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
                 finish()
                 return true
             }
-            R.id.favorite_action -> {
-//                detailViewModel.switchValue(false)
+            R.id.share_action -> {
+                val sendIntent: Intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+
+                    val text = """${binding.tvName.text}
+@${args.login}
+
+Work at ${binding.tvCompany.text}
+Blog Site: ${binding.tvBlog.text}
+Public Repos: ${binding.tvCountPublicRepos.text}
+Followers: ${binding.tvCountFollowers.text}
+Following: ${binding.tvCountFollowing.text}
+"""
+
+                    putExtra(Intent.EXTRA_TEXT, text)
+                    type = "text/plain"
+                }
+
+                val shareIntent = Intent.createChooser(sendIntent, null)
+                startActivity(shareIntent)
             }
         }
         return super.onOptionsItemSelected(item)
@@ -90,15 +107,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
             it?.let { it1 -> setUi(it1) }
         }
         detailViewModel.isFavorite.observe(this) {
-            when (item.itemId) {
-                R.id.favorite_action -> {
-                    if (it) {
-                        item.setIcon(R.drawable.ic_baseline_favorite_24)
-                    } else {
-                        item.setIcon(R.drawable.ic_baseline_favorite_border_24)
-                    }
-                }
-            }
+
         }
         detailViewModel.getUserDetail(login)
     }
