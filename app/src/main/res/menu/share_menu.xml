@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/share_action"
-        android:title="@string/favorite_unfavorite"
+        android:title="@string/share"
         android:icon="@drawable/ic_baseline_share_24"
         app:showAsAction="always"/>
 </menu>
