@@ -1,5 +1,6 @@
 package com.example.githubuser.ui.activity
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -10,18 +11,28 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.navArgs
 import com.bumptech.glide.Glide
 import com.example.githubuser.R
 import com.example.githubuser.adapter.SectionsPagerAdapter
+import com.example.githubuser.core.SettingPreferences
 import com.example.githubuser.databinding.ActivityDetailBinding
 import com.example.githubuser.model.UserDetailResponse
 import com.example.githubuser.viewmodel.DetailViewModel
+import com.example.githubuser.viewmodel.FavoriteUsersAddUpdateViewModel
+import com.example.githubuser.viewmodel.ViewModelFactory
 import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityDetailBinding
     private val detailViewModel: DetailViewModel by viewModels()
+    private lateinit var favoriteUsersAddUpdateViewModel: FavoriteUsersAddUpdateViewModel
+    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+
     private val args: DetailActivityArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -110,6 +121,14 @@ Following: ${binding.tvCountFollowing.text}
 
         }
         detailViewModel.getUserDetail(login)
+        favoriteUsersAddUpdateViewModel = obtainViewModel(this@DetailActivity)
+    }
+
+    private fun obtainViewModel(activity: AppCompatActivity): FavoriteUsersAddUpdateViewModel {
+        val pref = SettingPreferences.getInstance(dataStore)
+
+        val factory = ViewModelFactory.getInstance(activity.application, pref)
+        return ViewModelProvider(activity, factory).get(FavoriteUsersAddUpdateViewModel::class.java)
     }
 
     private fun setViewPager() {
