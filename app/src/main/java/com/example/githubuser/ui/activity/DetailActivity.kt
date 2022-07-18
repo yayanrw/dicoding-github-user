@@ -116,8 +116,14 @@ Following: ${binding.tvCountFollowing.text}
                     type,
                     avatarUrl
                 )
-                favoriteUsersAddUpdateViewModel.insert(favoriteUsers)
-                showToast(getString(R.string.favorite_user_added, login))
+
+                if (isFavorite) {
+                    favoriteUsersAddUpdateViewModel.delete(favoriteUsers)
+                    showToast(getString(R.string.favorite_user_deleted, login))
+                } else {
+                    favoriteUsersAddUpdateViewModel.insert(favoriteUsers)
+                    showToast(getString(R.string.favorite_user_added, login))
+                }
             }
         }
     }
