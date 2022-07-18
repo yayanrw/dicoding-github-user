@@ -1,6 +1,7 @@
 package com.example.githubuser.viewmodel
 
 import android.app.Application
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.githubuser.database.FavoriteUsers
 import com.example.githubuser.repository.FavoriteUsersRepository
@@ -15,5 +16,9 @@ class FavoriteUsersAddUpdateViewModel(application: Application) : ViewModel() {
 
     fun delete(favoriteUsers: FavoriteUsers) {
         mFavoriteUsersRepository.delete(favoriteUsers)
+    }
+
+    fun getUser(login: String): LiveData<List<FavoriteUsers>> {
+        return mFavoriteUsersRepository.getUser(login)
     }
 }
