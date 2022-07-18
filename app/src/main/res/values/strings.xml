@@ -20,4 +20,6 @@
     <string name="favorite_unfavorite">Favorite/UnFavorite</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="share">Share this user</string>
+    <string name="favorite_user_added">%1$s successfully added to favorites</string>
+    <string name="favorite_user_deleted">%1$s successfully removed from favorites</string>
 </resources>
