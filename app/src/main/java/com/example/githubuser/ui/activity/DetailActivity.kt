@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide
 import com.example.githubuser.R
 import com.example.githubuser.adapter.SectionsPagerAdapter
 import com.example.githubuser.core.SettingPreferences
+import com.example.githubuser.database.FavoriteUsers
 import com.example.githubuser.databinding.ActivityDetailBinding
 import com.example.githubuser.model.UserDetailResponse
 import com.example.githubuser.viewmodel.DetailViewModel
@@ -32,6 +33,9 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
     private val detailViewModel: DetailViewModel by viewModels()
     private lateinit var favoriteUsersAddUpdateViewModel: FavoriteUsersAddUpdateViewModel
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+    private lateinit var login: String
+    private lateinit var type: String
+    private lateinit var avatarUrl: String
 
     private val args: DetailActivityArgs by navArgs()
 
@@ -44,6 +48,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         setActionBar(args.login)
 
         binding.imgbOpenOnGithub.setOnClickListener(this)
+        binding.imgbFavorite.setOnClickListener(this)
         initViewModel(args.login)
     }
 
@@ -104,6 +109,15 @@ Following: ${binding.tvCountFollowing.text}
                 val openGithub = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                 startActivity(openGithub)
             }
+            R.id.imgb_favorite -> {
+                val favoriteUsers = FavoriteUsers(
+                    login,
+                    type,
+                    avatarUrl
+                )
+                favoriteUsersAddUpdateViewModel.insert(favoriteUsers)
+                showToast(getString(R.string.favorite_user_added, login))
+            }
         }
     }
 
@@ -159,6 +173,10 @@ Following: ${binding.tvCountFollowing.text}
         binding.tvCountFollowers.text = responseBody.followers.toString()
         binding.tvCountFollowing.text = responseBody.following.toString()
         binding.tvLinkGithub.text = responseBody.htmlUrl
+
+        login = responseBody.login.toString()
+        type = responseBody.type.toString()
+        avatarUrl = responseBody.avatarUrl.toString()
     }
 
     private fun showLoading(isLoading: Boolean) {
