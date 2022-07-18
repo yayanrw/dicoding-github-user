@@ -35,7 +35,7 @@ class SettingActivity : AppCompatActivity() {
 
     private fun setupTheme() {
         val pref = SettingPreferences.getInstance(dataStore)
-        settingViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
+        settingViewModel = ViewModelProvider(this, ViewModelFactory(application, pref)).get(
             SettingViewModel::class.java
         )
 
