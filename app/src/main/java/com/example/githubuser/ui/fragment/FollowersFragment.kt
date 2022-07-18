@@ -1,5 +1,6 @@
 package com.example.githubuser.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.adapter.UserAdapter
 import com.example.githubuser.databinding.FragmentFollowersBinding
 import com.example.githubuser.model.UsersResponse
+import com.example.githubuser.ui.activity.DetailActivity
 import com.example.githubuser.viewmodel.DetailViewModel
 
 class FollowersFragment : Fragment() {
@@ -51,7 +53,9 @@ class FollowersFragment : Fragment() {
 
         userAdapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback {
             override fun onItemClicked(data: UsersResponse) {
-//            do nothing
+                val intent = Intent(context, DetailActivity::class.java)
+                intent.putExtra(DetailActivity.login, data.login)
+                startActivity(intent)
             }
         })
     }
