@@ -17,8 +17,10 @@ import com.example.githubuser.viewmodel.ViewModelFactory
 
 class FavoriteUsersActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFavoriteUsersBinding
-    private lateinit var favoriteUsersAdapter: FavoriteUsersAdapter
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+    private val adapter: FavoriteUsersAdapter by lazy {
+        FavoriteUsersAdapter()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,18 +39,21 @@ class FavoriteUsersActivity : AppCompatActivity() {
     }
 
     private fun setupRV() {
-        favoriteUsersAdapter = FavoriteUsersAdapter()
-
-        binding.rvGithubUsers.layoutManager = LinearLayoutManager(this)
-        binding.rvGithubUsers.setHasFixedSize(true)
-        binding.rvGithubUsers.adapter = favoriteUsersAdapter
+        with(binding) {
+            val layoutManager = LinearLayoutManager(this@FavoriteUsersActivity)
+            this.rvGithubUsers.layoutManager = layoutManager
+            this.rvGithubUsers.setHasFixedSize(true)
+            this.rvGithubUsers.adapter = adapter
+        }
     }
 
     private fun initViewModel() {
         val favoriteUsersViewModel = obtainViewModel(this@FavoriteUsersActivity)
-        favoriteUsersViewModel.getAllFavoriteUsers().observe(this) { favoriteUsersList ->
-            if (favoriteUsersList != null) {
-                favoriteUsersAdapter.setListFavoriteUsers(favoriteUsersList)
+        favoriteUsersViewModel.getAllFavoriteUsers().observe(
+            this@FavoriteUsersActivity
+        ) { favList ->
+            if (favList != null) {
+                adapter.setListFavorite(favList)
             }
         }
     }
@@ -57,7 +62,7 @@ class FavoriteUsersActivity : AppCompatActivity() {
         val pref = SettingPreferences.getInstance(dataStore)
 
         val factory = ViewModelFactory.getInstance(activity.application, pref)
-        return ViewModelProvider(activity, factory).get(FavoriteUsersViewModel::class.java)
+        return ViewModelProvider(activity, factory)[FavoriteUsersViewModel::class.java]
     }
 
     private fun setActionBar() {
