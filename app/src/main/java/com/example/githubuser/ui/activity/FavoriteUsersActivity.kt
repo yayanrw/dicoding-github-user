@@ -1,6 +1,7 @@
 package com.example.githubuser.ui.activity
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.R
 import com.example.githubuser.adapter.FavoriteUsersAdapter
 import com.example.githubuser.core.SettingPreferences
+import com.example.githubuser.database.FavoriteUsers
 import com.example.githubuser.databinding.ActivityFavoriteUsersBinding
 import com.example.githubuser.viewmodel.FavoriteUsersViewModel
 import com.example.githubuser.viewmodel.ViewModelFactory
@@ -44,6 +46,13 @@ class FavoriteUsersActivity : AppCompatActivity() {
             this.rvGithubUsers.layoutManager = layoutManager
             this.rvGithubUsers.setHasFixedSize(true)
             this.rvGithubUsers.adapter = adapter
+            adapter.setOnItemClickCallback(object : FavoriteUsersAdapter.OnItemClickCallback {
+                override fun onItemClicked(data: FavoriteUsers) {
+                    val intent = Intent(this@FavoriteUsersActivity, DetailActivity::class.java)
+                    intent.putExtra(DetailActivity.login, data.login)
+                    startActivity(intent)
+                }
+            })
         }
     }
 

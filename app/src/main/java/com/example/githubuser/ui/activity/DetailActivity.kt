@@ -208,6 +208,8 @@ Following: ${binding.tvCountFollowing.text}
     }
 
     companion object {
+        const val login = "login"
+
         @StringRes
         private val TAB_TITLES = intArrayOf(
             R.string.followers,

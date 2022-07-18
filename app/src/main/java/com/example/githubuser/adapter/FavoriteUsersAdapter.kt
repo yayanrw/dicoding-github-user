@@ -7,11 +7,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.githubuser.database.FavoriteUsers
 import com.example.githubuser.databinding.ItemUsersBinding
-import com.example.githubuser.model.UsersResponse
 
 class FavoriteUsersAdapter : RecyclerView.Adapter<FavoriteUsersAdapter.MyViewHolder>() {
     private val listFavoriteUsers = ArrayList<FavoriteUsers>()
-//    private lateinit var onItemClickCallback: UserAdapter.OnItemClickCallback
+    private lateinit var onItemClickCallback: OnItemClickCallback
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = ItemUsersBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -36,7 +39,6 @@ class FavoriteUsersAdapter : RecyclerView.Adapter<FavoriteUsersAdapter.MyViewHol
     inner class MyViewHolder(private val binding: ItemUsersBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(favoriteUsers: FavoriteUsers) {
-//            val users = UsersResponse(favoriteUsers)
             with(binding) {
                 tvUsername.text = favoriteUsers.login
                 tvType.text = favoriteUsers.type
@@ -44,11 +46,12 @@ class FavoriteUsersAdapter : RecyclerView.Adapter<FavoriteUsersAdapter.MyViewHol
                     .load(favoriteUsers.avatar_url)
                     .circleCrop()
                     .into(binding.imgAvatar)
+                itemView.setOnClickListener { onItemClickCallback.onItemClicked(favoriteUsers) }
             }
         }
     }
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: UsersResponse)
+        fun onItemClicked(data: FavoriteUsers)
     }
 }
