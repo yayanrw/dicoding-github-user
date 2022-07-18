@@ -36,6 +36,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var login: String
     private lateinit var type: String
     private lateinit var avatarUrl: String
+    private var isFavorite = false
 
     private val args: DetailActivityArgs by navArgs()
 
@@ -131,11 +132,18 @@ Following: ${binding.tvCountFollowing.text}
         detailViewModel.userDetail.observe(this) {
             it?.let { it1 -> setUi(it1) }
         }
-        detailViewModel.isFavorite.observe(this) {
-
-        }
         detailViewModel.getUserDetail(login)
         favoriteUsersAddUpdateViewModel = obtainViewModel(this@DetailActivity)
+        favoriteUsersAddUpdateViewModel.getUser(login)
+            .observe(this@DetailActivity) { listFavoriteUsers ->
+                isFavorite = listFavoriteUsers.isNotEmpty()
+
+                if (isFavorite) {
+                    binding.imgbFavorite.setImageResource(R.drawable.ic_baseline_favorite_24)
+                } else {
+                    binding.imgbFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+                }
+            }
     }
 
     private fun obtainViewModel(activity: AppCompatActivity): FavoriteUsersAddUpdateViewModel {
